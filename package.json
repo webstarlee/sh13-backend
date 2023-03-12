@@ -18,9 +18,17 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.2",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.9.1"
+    "jwt-decode": "^2.2.0",
+    "mongoose": "^5.8.2",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "uninstall": "0.0.0",
+    "validator": "^12.1.0"
   }
 }
