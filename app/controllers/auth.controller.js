@@ -9,9 +9,8 @@ const validateLoginInput = require("../validation/login");
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
-
 exports.signup = (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
   //Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -22,7 +21,7 @@ exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
     userId: req.body.userId,
-    password: bcrypt.hashSync(req.body.password, 8)
+    password: bcrypt.hashSync(req.body.password, 8),
   });
 
   user.save((err, user) => {
@@ -34,7 +33,7 @@ exports.signup = (req, res) => {
     if (req.body.roles) {
       Role.find(
         {
-          name: { $in: req.body.roles }
+          name: { $in: req.body.roles },
         },
         (err, roles) => {
           if (err) {
@@ -42,8 +41,8 @@ exports.signup = (req, res) => {
             return;
           }
 
-          user.roles = roles.map(role => role._id);
-          user.save(err => {
+          user.roles = roles.map((role) => role._id);
+          user.save((err) => {
             if (err) {
               res.status(500).send({ message: err });
               return;
@@ -61,7 +60,7 @@ exports.signup = (req, res) => {
         }
 
         user.roles = [role._id];
-        user.save(err => {
+        user.save((err) => {
           if (err) {
             res.status(500).send({ message: err });
             return;
@@ -82,7 +81,7 @@ exports.signin = (req, res) => {
     return res.status(400).json(errors);
   }
   User.findOne({
-    userId: req.body.userId
+    userId: req.body.userId,
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -102,13 +101,19 @@ exports.signin = (req, res) => {
 
       if (!passwordIsValid) {
         return res.status(401).send({
-          message: "Invalid Password!"
+          message: "Invalid Password!",
         });
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
-      });
+      var token = jwt.sign(
+        {
+          user: { id: user._id, username: user.username, userId: user.userId },
+        },
+        config.secret,
+        {
+          expiresIn: 86400, // 24 hours
+        }
+      );
 
       var authorities = [];
 
@@ -120,7 +125,7 @@ exports.signin = (req, res) => {
         username: user.username,
         userId: user.userId,
         roles: authorities,
-        accessToken: token
+        accessToken: token,
       });
     });
 };
