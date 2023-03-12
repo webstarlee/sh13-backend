@@ -2,14 +2,26 @@ const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
 const Role = db.role;
+// Load input validation
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
+
 exports.signup = (req, res) => {
+  console.log(req.body)
+  //Form validation
+  const { errors, isValid } = validateRegisterInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+
   const user = new User({
     username: req.body.username,
-    email: req.body.email,
+    userId: req.body.userId,
     password: bcrypt.hashSync(req.body.password, 8)
   });
 
@@ -63,8 +75,14 @@ exports.signup = (req, res) => {
 };
 
 exports.signin = (req, res) => {
+  //Form Valdiation
+  const { errors, isValid } = validateLoginInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
   User.findOne({
-    username: req.body.username
+    userId: req.body.userId
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -84,7 +102,6 @@ exports.signin = (req, res) => {
 
       if (!passwordIsValid) {
         return res.status(401).send({
-          accessToken: null,
           message: "Invalid Password!"
         });
       }
@@ -101,7 +118,7 @@ exports.signin = (req, res) => {
       res.status(200).send({
         id: user._id,
         username: user.username,
-        email: user.email,
+        userId: user.userId,
         roles: authorities,
         accessToken: token
       });
