@@ -2,10 +2,10 @@ const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;
 
-checkDuplicateUserId = (req, res, next) => {
-  // UserId
+checkDuplicateUsername = (req, res, next) => {
+  // username
   User.findOne({
-    userId: req.body.userId,
+    username: req.body.username,
   }).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
@@ -13,7 +13,7 @@ checkDuplicateUserId = (req, res, next) => {
     }
 
     if (user) {
-      res.status(400).send({ message: "Failed! UserId is already in use!" });
+      res.status(400).send({ message: "Failed! username is already in use!" });
       return;
     }
 
@@ -37,7 +37,7 @@ checkRolesExisted = (req, res, next) => {
 };
 
 const verifySignUp = {
-  checkDuplicateUserId,
+  checkDuplicateUsername,
   checkRolesExisted,
 };
 

@@ -3,9 +3,22 @@ const mongoose = require("mongoose");
 const User = mongoose.model(
   "User",
   new mongoose.Schema({
-    username: String,
-    userId: String,
-    password: String,
+    fullname: {
+      type: String,
+      required: true,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    approved: {
+      type: Boolean,
+      default: false,
+    },
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,

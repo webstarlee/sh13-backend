@@ -21,7 +21,7 @@ verifyToken = (req, res, next) => {
 };
 
 isAdmin = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  User.findById(req.username).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;
@@ -52,7 +52,7 @@ isAdmin = (req, res, next) => {
 };
 
 isModerator = (req, res, next) => {
-  User.findById(req.userId).exec((err, user) => {
+  User.findById(req.username).exec((err, user) => {
     if (err) {
       res.status(500).send({ message: err });
       return;

@@ -19,8 +19,8 @@ exports.signup = (req, res) => {
   }
 
   const user = new User({
+    fullname: req.body.fullname,
     username: req.body.username,
-    userId: req.body.userId,
     password: bcrypt.hashSync(req.body.password, 8),
   });
 
@@ -81,7 +81,7 @@ exports.signin = (req, res) => {
     return res.status(400).json(errors);
   }
   User.findOne({
-    userId: req.body.userId,
+    username: req.body.username,
   })
     .populate("roles", "-__v")
     .exec((err, user) => {
@@ -91,7 +91,7 @@ exports.signin = (req, res) => {
       }
 
       if (!user) {
-        return res.status(404).send({ message: "User Not found." });
+        return res.status(404).send({ message: "Invalid Credentials." });
       }
 
       var passwordIsValid = bcrypt.compareSync(
@@ -101,13 +101,23 @@ exports.signin = (req, res) => {
 
       if (!passwordIsValid) {
         return res.status(401).send({
-          message: "Invalid Password!",
+          message: "Invalid Credentials!",
+        });
+      }
+
+      if (!user.approved) {
+        return res.status(401).send({
+          message: "User was not approved yet!",
         });
       }
 
       var token = jwt.sign(
         {
-          user: { id: user._id, username: user.username, userId: user.userId },
+          user: {
+            id: user._id,
+            fullname: user.fullname,
+            username: user.username,
+          },
         },
         config.secret,
         {
@@ -121,10 +131,12 @@ exports.signin = (req, res) => {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
       res.status(200).send({
-        id: user._id,
-        username: user.username,
-        userId: user.userId,
-        roles: authorities,
+        user: {
+          id: user._id,
+          fullname: user.fullname,
+          username: user.username,
+          roles: authorities,
+        },
         accessToken: token,
       });
     });
