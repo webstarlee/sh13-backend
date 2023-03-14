@@ -30,5 +30,8 @@
     "passport-jwt": "^4.0.0",
     "uninstall": "0.0.0",
     "validator": "^12.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
   }
 }
