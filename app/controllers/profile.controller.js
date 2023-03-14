@@ -7,7 +7,7 @@ var bcrypt = require("bcryptjs");
 exports.changeUsername = (req, res) => {
   if (!req.body.username) {
     return res.status(400).json({
-      message: "username field is required",
+      message: "Username field is required",
     });
   }
 
@@ -26,7 +26,7 @@ exports.changeUsername = (req, res) => {
           user.username = req.body.username;
           user.save().then((user) => {
             res.status(200).json({
-              message: "Username has changed successfully!",
+              message: "Username has been changed successfully!",
               data: user,
             });
           });
@@ -51,7 +51,7 @@ exports.changeFullname = (req, res) => {
       user.fullname = req.body.fullname;
       user.save().then((user) => {
         res.status(200).json({
-          message: "Fullname has changed successfully!",
+          message: "Fullname has been changed successfully!",
           data: user,
         });
       });
@@ -90,13 +90,13 @@ exports.changePassword = (req, res) => {
         hashed = bcrypt.compareSync(req.body.oldPassword, user.password);
         if (!hashed) {
           return res.status(400).json({
-            message: "Old password is not correct",
+            message: "Old password is Incorrect",
           });
         }
         user.password = bcrypt.hashSync(req.body.password, 8);
         user.save().then((user) => {
           return res.status(200).json({
-            message: "Password has changed successfully",
+            message: "Password has been changed successfully",
             user: user,
           });
         });
