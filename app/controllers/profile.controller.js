@@ -26,7 +26,7 @@ exports.changeUsername = (req, res) => {
           user.username = req.body.username;
           user.save().then((user) => {
             res.status(200).json({
-              message: "username has changed successfully!",
+              message: "Username has changed successfully!",
               data: user,
             });
           });
@@ -39,7 +39,7 @@ exports.changeUsername = (req, res) => {
 exports.changeFullname = (req, res) => {
   if (!req.body.fullname) {
     return res.status(400).json({
-      message: "fullname field is required",
+      message: "Fullname field is required",
     });
   }
   User.findById(req.id).then((user) => {
@@ -51,7 +51,7 @@ exports.changeFullname = (req, res) => {
       user.fullname = req.body.fullname;
       user.save().then((user) => {
         res.status(200).json({
-          message: "fullname has changed successfully!",
+          message: "Fullname has changed successfully!",
           data: user,
         });
       });
@@ -90,7 +90,7 @@ exports.changePassword = (req, res) => {
         hashed = bcrypt.compareSync(req.body.oldPassword, user.password);
         if (!hashed) {
           return res.status(400).json({
-            message: "old password is not correct",
+            message: "Old password is not correct",
           });
         }
         user.password = bcrypt.hashSync(req.body.password, 8);
