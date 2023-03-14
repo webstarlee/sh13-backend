@@ -113,11 +113,7 @@ exports.signin = (req, res) => {
 
       var token = jwt.sign(
         {
-          user: {
-            id: user._id,
-            fullname: user.fullname,
-            username: user.username,
-          },
+          user: user,
         },
         config.secret,
         {
