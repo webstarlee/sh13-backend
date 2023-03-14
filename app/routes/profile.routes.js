@@ -11,17 +11,17 @@ module.exports = function (app) {
   });
 
   app.post(
-    "/api/profile/changeFullname",
+    "/api/profile/change/fullname",
     [authJwt.verifyToken],
     controller.changeFullname
   );
   app.post(
-    "/api/profile/changeUsername",
+    "/api/profile/change/username",
     [authJwt.verifyToken],
     controller.changeUsername
   );
   app.post(
-    "/api/profile/changePassword",
+    "/api/profile/change/password",
     [authJwt.verifyToken],
     controller.changePassword
   );
