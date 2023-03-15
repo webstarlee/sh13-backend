@@ -21,34 +21,21 @@ verifyToken = (req, res, next) => {
 };
 
 isAdmin = (req, res, next) => {
-  User.findById(req.username).exec((err, user) => {
-    if (err) {
-      res.status(500).send({ message: err });
-      return;
-    }
+  User.findById(req.id)
+    .populate("roles")
+    .then((user) => {
+      console.log(user);
 
-    Role.find(
-      {
-        _id: { $in: user.roles }
-      },
-      (err, roles) => {
-        if (err) {
-          res.status(500).send({ message: err });
-          return;
-        }
-
-        for (let i = 0; i < roles.length; i++) {
-          if (roles[i].name === "admin") {
-            next();
-            return;
-          }
-        }
-
-        res.status(403).send({ message: "Require Admin Role!" });
+      const isAdmin = user.roles.filter(
+        (role) => role.name.toString() === "admin"
+      ).length;
+      if (isAdmin) {
+        next();
         return;
+      } else {
+        res.status(403).send({ message: "Require Admin Role!" });
       }
-    );
-  });
+    });
 };
 
 isModerator = (req, res, next) => {
@@ -60,7 +47,7 @@ isModerator = (req, res, next) => {
 
     Role.find(
       {
-        _id: { $in: user.roles }
+        _id: { $in: user.roles },
       },
       (err, roles) => {
         if (err) {
@@ -85,6 +72,6 @@ isModerator = (req, res, next) => {
 const authJwt = {
   verifyToken,
   isAdmin,
-  isModerator
+  isModerator,
 };
 module.exports = authJwt;

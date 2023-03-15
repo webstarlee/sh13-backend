@@ -10,9 +10,11 @@ module.exports = function(app) {
     next();
   });
 
-  app.get("/api/test/all", controller.allAccess);
+  app.get("/api/user/all", controller.allAccess);
 
   app.get("/api/user/current", [authJwt.verifyToken], controller.userBoard);
+  app.post("/api/user/approve", [authJwt.verifyToken, authJwt.isAdmin], controller.approveUser);
+  app.delete("/api/user/delete/:id", [authJwt.verifyToken, authJwt.isAdmin], controller.deleteUser);
 
   app.get(
     "/api/test/mod",
