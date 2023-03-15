@@ -13,20 +13,24 @@ const Email = mongoose.model(
         },
         status: {
             type: String,
-            default: 'true',
+            default: 'alive',
         },
         password: {
             type: String,
             required: true,
         },
-        firstname: {
+        recovery: {
             type: String,
-            required: true,
+            required: false,
         },
-        lastname: {
+        sms: {
             type: String,
-            required: true,
-        }
+            default: "free"
+        },
+        createdAt: {
+            type: Date,
+            default: new Date(),
+        },
     },
     )
 );

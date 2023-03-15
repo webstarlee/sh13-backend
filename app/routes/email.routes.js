@@ -11,7 +11,8 @@ module.exports = function (app) {
     });
 
     app.get(
-        "/api/email/all/", controller.getEmails
+        "/api/email/all/",
+        controller.getEmails
     );
     app.post("/api/email/create",
         [authJwt.verifyToken],
