@@ -13,7 +13,7 @@ exports.getEmails = (req, res) => {
       }
       res.status(200).send({
         data: email,
-        message: "Email fetch success"
+        message: "Email fetch success",
       });
     });
 };
@@ -51,16 +51,18 @@ exports.createEmail = (req, res) => {
 };
 
 exports.updateEmail = (req, res) => {
+  console.log(req.body);
   Email.findByIdAndUpdate(
     req.body.id,
     {
       $set: {
+        user: req.id,
         email: req.body.email,
-        password: req.body.password,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
         status: req.body.status,
-        user: req.user.id,
+        password: req.body.password,
+        recovery: req.body.recovery,
+        sms: req.body.sms,
+        createdAt: req.body.createdAt,
       },
     },
     {
@@ -69,9 +71,14 @@ exports.updateEmail = (req, res) => {
     },
     function (err, updatedData) {
       if (err) {
-        return res.send("Error updating");
+        return res.status(400).json({
+          message: err,
+        });
       } else {
-        return res.status(200).send(updatedData);
+        res.status(200).send({
+            data: updatedData,
+            message: "Email account updated successfully!"
+        });
       }
     }
   );
