@@ -1,3 +1,9 @@
+/*
+Register Middleware
+Authored by Lee
+Created At 2023/3/10
+*/
+
 const db = require("../models");
 const ROLES = db.ROLES;
 const User = db.user;

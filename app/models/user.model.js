@@ -1,3 +1,8 @@
+/*
+User Model
+Authored by Lee
+Created At 2023/3/10
+*/
 const mongoose = require("mongoose");
 
 const User = mongoose.model(
@@ -22,9 +27,9 @@ const User = mongoose.model(
     roles: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Role"
-      }
-    ]
+        ref: "Role",
+      },
+    ],
   })
 );
 

@@ -1,3 +1,8 @@
+/*
+User Controller
+Authored by Lee
+Created At 2023/3/10
+*/
 const db = require("../models");
 const User = db.user;
 exports.allAccess = (req, res) => {

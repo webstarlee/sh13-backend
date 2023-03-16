@@ -1,7 +1,7 @@
 /*
-Email Controller
-Authored by Ace
-Created At 2023/3/14
+Image Controller
+Authored by Lee
+Created At 2023/3/17
 */
 const db = require("../models");
 const Email = db.email;

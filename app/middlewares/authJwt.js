@@ -1,3 +1,8 @@
+/*
+Authentication Middleware
+Authored by Lee
+Created At 2023/3/10
+*/
 const jwt = require("jsonwebtoken");
 const config = require("../config/auth.config.js");
 const db = require("../models");
@@ -24,8 +29,6 @@ isAdmin = (req, res, next) => {
   User.findById(req.id)
     .populate("roles")
     .then((user) => {
-      console.log(user);
-
       const isAdmin = user.roles.filter(
         (role) => role.name.toString() === "admin"
       ).length;

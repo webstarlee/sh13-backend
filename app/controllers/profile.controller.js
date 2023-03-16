@@ -1,3 +1,9 @@
+/*
+Profile Controller
+Authored by Athena
+Created At 2023/3/14
+*/
+
 const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;

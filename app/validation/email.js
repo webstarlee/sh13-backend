@@ -1,3 +1,8 @@
+/*
+Email Validation
+Authored by Ace
+Created At 2023/3/14
+*/
 const Validator = require("validator");
 const isEmpty = require("is-empty");
 

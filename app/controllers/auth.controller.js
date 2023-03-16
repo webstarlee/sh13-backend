@@ -1,3 +1,8 @@
+/*
+Authentication Controller
+Authored by Lee
+Created At 2023/3/10
+*/
 const config = require("../config/auth.config");
 const db = require("../models");
 const User = db.user;
@@ -10,7 +15,6 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  console.log(req.body);
   //Form validation
   const { errors, isValid } = validateRegisterInput(req.body);
 

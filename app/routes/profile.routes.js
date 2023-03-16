@@ -1,3 +1,8 @@
+/*
+Profile Routes
+Authored by Athena
+Created At 2023/3/14
+*/
 const { authJwt } = require("../middlewares");
 const controller = require("../controllers/profile.controller");
 

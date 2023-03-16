@@ -1,3 +1,8 @@
+/*
+Seed
+Authored by Lee
+Created At 2023/3/15
+*/
 var bcrypt = require("bcryptjs");
 const db = require("../models");
 const Role = db.role;

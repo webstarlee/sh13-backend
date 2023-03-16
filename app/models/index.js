@@ -1,4 +1,10 @@
-const mongoose = require('mongoose');
+/*
+Index Model
+Authored by Lee
+Created At 2023/3/10
+*/
+
+const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 const db = {};
