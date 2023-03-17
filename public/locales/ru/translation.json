@@ -1,0 +1,13 @@
+{
+  "welcome": "Вот мой пример кода",
+  "auth": {
+    "sign_in": "Войти",
+    "sign_up": "регистр",
+    "username": "Имя пользователя",
+    "fullname": "полное имя",
+    "password": "Пароль",
+    "password_confirm": "подтвердить пароль",
+    "dont_have_account": "У вас еще нет учетной записи?",
+    "already_have_account": "У вас уже есть аккаунт?"
+  }
+}

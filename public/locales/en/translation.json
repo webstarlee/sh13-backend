@@ -1,0 +1,13 @@
+{
+  "welcome": "Here is my some sample code",
+  "auth": {
+    "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "username": "Username",
+    "fullname": "Fullname",
+    "password": "Password",
+    "password_confirm": "Password Confirm",
+    "dont_have_account": "Don't have an account yet?",
+    "already_have_account": "Already have an Account?"
+  }
+}
