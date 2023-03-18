@@ -9,8 +9,8 @@ import fs from "fs";
 import ValidateImageInput from "../validation/image";
 
 export function getImages(req, res) {
-  Image.find().then((err, images) => {
-    if (err) {
+  Image.find().then((images) => {
+    if (!images) {
       res.status(500).send({ message: err });
       return;
     }
@@ -37,7 +37,6 @@ export function createImage(req, res) {
       const path = pathArr[pathArr.length - 1].replace("public", "");
 
       const newImage = new Image({
-        type: req.type,
         path: path,
       });
 

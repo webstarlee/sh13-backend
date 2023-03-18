@@ -8,7 +8,6 @@ import isEmpty from "is-empty";
 
 export default function ValidateImageInput(data) {
   let errors = {};
-  data.type = !isEmpty(data.type) ? data.type : "";
 
   //file checks
   if (_isEmpty(data.file)) {

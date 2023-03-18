@@ -16,7 +16,7 @@ export default function (app) {
   });
 
   app.get(
-    "/api/image/fetch/:type",
+    "/api/image/fetch",
     [authJwt.verifyToken],
     getImages
   );
