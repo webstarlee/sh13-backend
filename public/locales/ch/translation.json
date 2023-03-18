@@ -1,0 +1,14 @@
+{
+  "welcome": "Here is my some sample code",
+  "auth": {
+    "invalid_credential": "无效凭证。",
+    "user_not_approve": "用户还没有被批准。",
+    "user_register_success": "用户注册成功！",
+    "fullname_require": "全名字段是必需的。",
+    "username_require": "用户名字段是必需的。",
+    "password_require": "密码字段是必需的。",
+    "password_length_require": "密码必须至少为 6 个字符。",
+    "password_confirm_require": "确认密码字段是必需的。",
+    "password_match": "密码必须匹配。"
+  }
+}

@@ -1,13 +1,14 @@
 {
-  "welcome": "Вот мой пример кода",
+  "welcome": "Here is my some sample code",
   "auth": {
-    "sign_in": "Войти",
-    "sign_up": "регистр",
-    "username": "Имя пользователя",
-    "fullname": "полное имя",
-    "password": "Пароль",
-    "password_confirm": "подтвердить пароль",
-    "dont_have_account": "У вас еще нет учетной записи?",
-    "already_have_account": "У вас уже есть аккаунт?"
+    "invalid_credential": "Неверные учетные данные.",
+    "user_not_approve": "Пользователь еще не одобрен.",
+    "user_register_success": "Пользователь успешно зарегистрирован!",
+    "fullname_require": "Поле Полное имя обязательно.",
+    "username_require": "Поле имени пользователя обязательно.",
+    "password_require": "Поле пароля обязательно..",
+    "password_length_require": "Пароль должен быть не менее 6 символов.",
+    "password_confirm_require": "Поле подтверждения пароля обязательно.",
+    "password_match": "Пароли должны совпадать."
   }
 }

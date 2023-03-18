@@ -12,7 +12,7 @@ import { hashSync, compareSync } from "bcryptjs";
 
 export function signup(req, res) {
   //Form validation
-  const { errors, isValid } = validateRegisterInput(req.body);
+  const { errors, isValid } = validateRegisterInput(req);
 
   if (!isValid) {
     return res.status(400).json(errors);
@@ -59,7 +59,7 @@ export function signin(req, res) {
     .populate("roles", "-__v")
     .exec().then((user) => {
       if (!user) {
-        return res.status(404).send({ message: "Invalid Credentials." });
+        return res.status(404).send({ message: req.t('auth.invalid_credential') });
       }
 
       var passwordIsValid = compareSync(
@@ -69,7 +69,7 @@ export function signin(req, res) {
 
       if (!passwordIsValid) {
         return res.status(401).send({
-          message: "Invalid Credentials!",
+          message: req.t('auth.invalid_credential'),
         });
       }
 

@@ -7,6 +7,30 @@ Created At 2023/3/14
 import { User } from "../models";
 import { compareSync, hashSync } from "bcryptjs";
 
+export function changeAvatar(req, res) {
+  if (!req.body.avatar) {
+    return res.status(400).json({
+      message: "Avatar field is required",
+    });
+  }
+
+  User.findById(req.id).then((user) => {
+    if (!user) {
+      return res.status(404).json({
+        message: "Can not find User.",
+      });
+    }
+
+    user.avatar = req.body.avatar;
+    user.save().then((user) => {
+      res.status(200).json({
+        message: "Avatar has been updated successfully!",
+        data: user,
+      });
+    });
+  });
+}
+
 export function changeUsername(req, res) {
   if (!req.body.username) {
     return res.status(400).json({

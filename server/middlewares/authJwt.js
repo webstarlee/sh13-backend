@@ -27,14 +27,18 @@ const isAdmin = (req, res, next) => {
   User.findById(req.id)
     .populate("roles")
     .then((user) => {
-      const isAdmin = user.roles.filter(
-        (role) => role.name.toString() === "admin"
-      ).length;
-      if (isAdmin) {
-        next();
-        return;
+      if (user) {
+        const isAdmin = user.roles.filter(
+          (role) => role.name.toString() === "admin"
+        ).length;
+        if (isAdmin) {
+          next();
+          return;
+        } else {
+          res.status(403).send({ message: "Require Admin Role!" });
+        }
       } else {
-        res.status(403).send({ message: "Require Admin Role!" });
+        return res.status(401).send({ message: "Unauthorized!" });
       }
     });
 };

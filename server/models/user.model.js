@@ -16,6 +16,11 @@ const User = model(
       type: String,
       required: true,
     },
+    avatar: {
+      type: Schema.Types.ObjectId,
+      ref: "Image",
+      required: false
+    },
     password: {
       type: String,
       required: true,

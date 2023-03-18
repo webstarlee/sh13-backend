@@ -13,7 +13,6 @@ import {
 } from "./config/db.config";
 import Seed from "./seeds/Seed";
 import {
-  headerRoute,
   authRoutes,
   userRoutes,
   profileRoutes,
@@ -46,7 +45,6 @@ mongoose
     process.exit();
   });
 
-headerRoute(app);
 authRoutes(app);
 userRoutes(app);
 profileRoutes(app);

@@ -54,6 +54,12 @@ export function createImage(req, res) {
 export function updateImage(req, res) {
   Image.findById(req.body.id)
     .then((image) => {
+      if(!image) {
+        return res.status(404).json({
+          message: "Can not find Image.",
+        });
+      }
+
       fs.unlink('./public'+image.path, (err) => {
         if (err) {
           console.log("Delete File successfully.");

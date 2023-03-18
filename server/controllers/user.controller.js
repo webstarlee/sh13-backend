@@ -27,7 +27,7 @@ export function allAccess(req, res) {
 
 export function userBoard(req, res) {
   User.findById(req.id).then((user) => {
-    console.log(req.t('auth.sign_in'));
+    console.log(req.t('auth.invalid_credential'));
     res.status(200).json({ data: user });
   });
 }
