@@ -7,15 +7,22 @@ import { Image } from "../models";
 import base64Img from "../modules/base64Img";
 import fs from "fs";
 import ValidateImageInput from "../validation/image";
+import Path from "path";
 
-export function getImages(req, res) {
+export async function getImages(req, res) {
   Image.find().then((images) => {
     if (!images) {
       res.status(500).send({ message: err });
       return;
     }
+
+    const exist_imgs = images.filter( image => {
+      const path = Path.join("./public", image.path)
+      return fs.existsSync(path);
+    })
+
     res.status(200).send({
-      data: images,
+      data: exist_imgs,
       message: "Image fetch success",
     });
   });
@@ -99,8 +106,18 @@ export function deleteImage(req, res) {
         message: "Can't find Image",
       });
     }
-    res.json({
-      message: "Deleted image successfully!",
-    });
+    try {
+      fs.unlinkSync("./public"+image.path)
+      res.json({
+        message: "Deleted image successfully!",
+      });
+      //file removed
+    } catch(err) {
+      console.error(err)
+      return res.status(404).json({
+        message: "Can't delete Image",
+      });
+    }
+    
   });
 }

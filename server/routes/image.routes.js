@@ -20,6 +20,7 @@ export default function (app) {
     [authJwt.verifyToken],
     getImages
   );
+
   app.post(
     "/api/image/create",
     [authJwt.verifyToken, authJwt.isAdmin],
@@ -31,6 +32,7 @@ export default function (app) {
     [authJwt.verifyToken, authJwt.isAdmin],
     updateImage
   );
+  
   app.delete(
     "/api/image/delete/:id",
     [authJwt.verifyToken, authJwt.isAdmin],

@@ -6,12 +6,10 @@ Created At 2023/3/10
 import { isEmpty as _isEmpty, isLength, equals } from "validator";
 import isEmpty from "is-empty";
 
-export default function validateRegisterInput(request) {
+export default function validateRegisterInput(req) {
   let errors = {};
 
-  const data = request.data;
-  t = request.t;
-
+  const data = req.body;
   // Convert empty fields to an empty string so we can use validator functions
   data.fullname = !isEmpty(data.fullname) ? data.fullname : "";
   data.username = !isEmpty(data.username) ? data.username : "";
@@ -22,7 +20,7 @@ export default function validateRegisterInput(request) {
 
   //Name checks
   if (_isEmpty(data.fullname)) {
-    errors.fullname = t('fullname_require');
+    errors.fullname = req.t('fullname_require');
   }
 
   //username checks

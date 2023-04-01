@@ -11,6 +11,7 @@ import { sign } from "jsonwebtoken";
 import { hashSync, compareSync } from "bcryptjs";
 
 export function signup(req, res) {
+  console.log(req.t('auth.invalid_credential'));
   //Form validation
   const { errors, isValid } = validateRegisterInput(req);
 

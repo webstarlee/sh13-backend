@@ -40,7 +40,7 @@ export function createEmail(req, res) {
         createdAt: req.body.createdAt,
       });
 
-      newEmail.save(),then((email) => {
+      newEmail.save().then((email) => {
         res.status(200)
         .send({ message: "New email account added successfully!" });
       });
@@ -78,7 +78,13 @@ export function updateEmail(req, res) {
 }
 
 export function deleteEmail(req, res) {
-  Email.findOneAndRemove({ _id: req.params.id }).exec(() => {
+  Email.findOneAndDelete({ _id: req.params.id }).then((email) => {
+    if (!email) {
+      return res.status(404).json({
+        message: "Can't find Email",
+      });
+    }
+
     res.status(200).send({ message: "Delete Success" });
   });
 }
